@@ -43,7 +43,7 @@ export default class NewExpense extends React.Component {
     handleDescriptionChange = e =>
         this.setState({ description: e.target.value })
     registerExpense = () => {
-        fetch("http://localhost:3000/expenses", {
+        fetch("http://https://appartamento.herokuapp.com/expenses", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

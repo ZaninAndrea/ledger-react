@@ -25,7 +25,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props)
 
-        fetch("http://localhost:3000/users")
+        fetch("http://https://appartamento.herokuapp.com/users")
             .then(res => res.json())
             .then(users =>
                 this.setState({
@@ -55,7 +55,7 @@ export default class App extends React.Component {
             userName: name,
             loadingDebts: true,
         })
-        fetch(`http://localhost:3000/users/${_id}/debts`)
+        fetch(`http://https://appartamento.herokuapp.com/users/${_id}/debts`)
             .then(res => res.json())
             .then(debts =>
                 this.setState({
@@ -76,7 +76,9 @@ export default class App extends React.Component {
 
     cancelDebt = debtee => {
         fetch(
-            `http://localhost:3000/users/${this.state.userId}/debts/${debtee}`,
+            `http://https://appartamento.herokuapp.com/users/${
+                this.state.userId
+            }/debts/${debtee}`,
             {
                 method: "DELETE",
             }
