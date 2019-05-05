@@ -11,9 +11,11 @@ import green from "@material-ui/core/colors/green"
 import DeleteIcon from "@material-ui/icons/Delete"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import { TableHead } from "@material-ui/core"
+import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery"
 
 export default ({ loading, data, userId }) => {
     const getName = ({ _id, name }) => (userId === _id ? "You" : name)
+    const wideScreen = useMediaQuery("(min-width:600px)")
 
     if (loading)
         return (
@@ -31,43 +33,75 @@ export default ({ loading, data, userId }) => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell component="th" scope="row">
+                            <TableCell
+                                component="th"
+                                scope="row"
+                                padding="dense"
+                            >
                                 Spender
                             </TableCell>
-                            <TableCell component="th" scope="row">
+                            <TableCell
+                                component="th"
+                                scope="row"
+                                padding="dense"
+                            >
                                 Description
                             </TableCell>
                             <TableCell
                                 component="th"
                                 scope="row"
                                 align="center"
+                                padding="dense"
                             >
                                 Amount
                             </TableCell>
-                            <TableCell component="th" scope="row">
-                                Beneficiaries
-                            </TableCell>
+                            {wideScreen && (
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    padding="dense"
+                                >
+                                    Beneficiaries
+                                </TableCell>
+                            )}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {data.map(row => (
                             <TableRow>
-                                <TableCell component="th" scope="row">
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    padding="dense"
+                                >
                                     {getName(row.spender)}
                                 </TableCell>
-                                <TableCell component="th" scope="row">
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    padding="dense"
+                                >
                                     {row.description}
                                 </TableCell>
                                 <TableCell
                                     component="th"
                                     scope="row"
                                     align="center"
+                                    padding="dense"
                                 >
                                     {row.amount} €
                                 </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {row.beneficiaries.map(getName).join(", ")}
-                                </TableCell>
+                                {wideScreen && (
+                                    <TableCell
+                                        component="th"
+                                        scope="row"
+                                        padding="dense"
+                                    >
+                                        {row.beneficiaries
+                                            .map(getName)
+                                            .join(", ")}
+                                    </TableCell>
+                                )}
                             </TableRow>
                         ))}
                     </TableBody>

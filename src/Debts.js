@@ -29,13 +29,18 @@ export default ({ loading, data, cancelDebt }) => {
                     <TableBody>
                         {data.map(row => (
                             <TableRow key={row.debtee._id}>
-                                <TableCell component="th" scope="row">
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    padding="dense"
+                                >
                                     {row.debtee.name}
                                 </TableCell>
                                 <TableCell
                                     component="th"
                                     scope="row"
                                     align="center"
+                                    padding="dense"
                                     style={{
                                         color:
                                             row.amount > 0
