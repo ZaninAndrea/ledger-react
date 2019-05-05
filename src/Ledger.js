@@ -10,8 +10,11 @@ import red from "@material-ui/core/colors/red"
 import green from "@material-ui/core/colors/green"
 import DeleteIcon from "@material-ui/icons/Delete"
 import CircularProgress from "@material-ui/core/CircularProgress"
+import { TableHead } from "@material-ui/core"
 
-export default ({ loading, data, cancelDebt }) => {
+export default ({ loading, data, userId }) => {
+    const getName = ({ _id, name }) => (userId === _id ? "You" : name)
+
     if (loading)
         return (
             <div
@@ -26,34 +29,44 @@ export default ({ loading, data, cancelDebt }) => {
         return (
             <Paper>
                 <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell component="th" scope="row">
+                                Spender
+                            </TableCell>
+                            <TableCell component="th" scope="row">
+                                Description
+                            </TableCell>
+                            <TableCell
+                                component="th"
+                                scope="row"
+                                align="center"
+                            >
+                                Amount
+                            </TableCell>
+                            <TableCell component="th" scope="row">
+                                Beneficiaries
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
                         {data.map(row => (
-                            <TableRow key={row.debtee._id}>
+                            <TableRow>
                                 <TableCell component="th" scope="row">
-                                    {row.debtee.name}
+                                    {getName(row.spender)}
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                    {row.description}
                                 </TableCell>
                                 <TableCell
                                     component="th"
                                     scope="row"
                                     align="center"
-                                    style={{
-                                        color:
-                                            row.amount > 0
-                                                ? red[500]
-                                                : green[500],
-                                    }}
                                 >
-                                    {row.amount}
+                                    {row.amount} €
                                 </TableCell>
-                                <TableCell padding="dense" align="right">
-                                    <IconButton
-                                        aria-label="Delete"
-                                        onClick={() =>
-                                            cancelDebt(row.debtee._id)
-                                        }
-                                    >
-                                        <DeleteIcon />
-                                    </IconButton>
+                                <TableCell component="th" scope="row">
+                                    {row.beneficiaries.map(getName).join(", ")}
                                 </TableCell>
                             </TableRow>
                         ))}

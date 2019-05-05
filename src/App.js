@@ -16,10 +16,12 @@ export default class App extends React.Component {
     state = {
         loadingUsers: true,
         loadingDebts: false,
+        loadingLedger: false,
         users: [],
         userId: null,
         userName: null,
         debts: [],
+        ledger: [],
         createNewExpense: false,
     }
 
@@ -55,6 +57,7 @@ export default class App extends React.Component {
             userId: _id,
             userName: name,
             loadingDebts: true,
+            loadingLedger: true,
         })
         fetch(`https://appartamento.herokuapp.com/users/${_id}/debts`)
             .then(res => res.json())
@@ -62,6 +65,14 @@ export default class App extends React.Component {
                 this.setState({
                     debts,
                     loadingDebts: false,
+                })
+            )
+        fetch(`https://appartamento.herokuapp.com/users/${_id}/ledger`)
+            .then(res => res.json())
+            .then(ledger =>
+                this.setState({
+                    ledger,
+                    loadingLedger: false,
                 })
             )
     }
@@ -89,7 +100,11 @@ export default class App extends React.Component {
     render() {
         if (this.state.loadingUsers)
             return (
-                <div style={{ margin: "100px calc(50vw - 30px)" }}>
+                <div
+                    style={{
+                        margin: "100px calc(50vw - 30px)",
+                    }}
+                >
                     <CircularProgress size="60px" />
                 </div>
             )
@@ -116,10 +131,15 @@ export default class App extends React.Component {
                     />
                     <UserPage
                         debts={this.state.debts}
+                        ledger={this.state.ledger}
                         name={this.state.userName}
+                        loading={
+                            this.state.loadingDebts || this.state.loadingLedger
+                        }
                         users={this.state.users}
                         cancelDebt={this.cancelDebt}
                         unselectUser={this.unselectUser}
+                        userId={this.state.userId}
                         newExpenseCallback={() =>
                             this.setState({
                                 createNewExpense: true,

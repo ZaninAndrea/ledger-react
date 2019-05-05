@@ -3,15 +3,17 @@ import Typography from "@material-ui/core/Typography"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Debts from "./Debts"
+import Ledger from "./Ledger"
 import Fab from "@material-ui/core/Fab"
 import IconButton from "@material-ui/core/IconButton"
 import AddIcon from "@material-ui/icons/Add"
 import ExitIcon from "@material-ui/icons/ExitToApp"
 
 export default ({
-    name,
+    userId,
     debts,
-    loadingDebts,
+    loading,
+    ledger,
     newExpenseCallback,
     cancelDebt,
     unselectUser,
@@ -40,11 +42,12 @@ export default ({
             </Toolbar>
         </AppBar>
         <div style={{ padding: "16px" }}>
-            <Debts
-                data={debts}
-                loading={loadingDebts}
-                cancelDebt={cancelDebt}
-            />
+            <Typography variant="h6">Debts yet to pay off</Typography>
+            <br />
+            <Debts data={debts} loading={loading} cancelDebt={cancelDebt} />
+            <br />
+            <Typography variant="h6">All expenses</Typography>
+            <Ledger data={ledger} loading={loading} userId={userId} />
             <Fab
                 color="primary"
                 aria-label="Add"

@@ -78,6 +78,10 @@ export default class NewExpense extends React.Component {
                             color="inherit"
                             onClick={this.props.handleClose}
                             aria-label="Close"
+                            style={{
+                                marginLeft: -12,
+                                marginRight: 20,
+                            }}
                         >
                             <CloseIcon />
                         </IconButton>
