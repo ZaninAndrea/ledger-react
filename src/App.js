@@ -26,7 +26,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props)
 
-        fetch("http://https://appartamento.herokuapp.com/users")
+        fetch("https://appartamento.herokuapp.com/users")
             .then(res => res.json())
             .then(users =>
                 this.setState({
@@ -56,7 +56,7 @@ export default class App extends React.Component {
             userName: name,
             loadingDebts: true,
         })
-        fetch(`http://https://appartamento.herokuapp.com/users/${_id}/debts`)
+        fetch(`https://appartamento.herokuapp.com/users/${_id}/debts`)
             .then(res => res.json())
             .then(debts =>
                 this.setState({
@@ -77,7 +77,7 @@ export default class App extends React.Component {
 
     cancelDebt = debtee => {
         fetch(
-            `http://https://appartamento.herokuapp.com/users/${
+            `https://appartamento.herokuapp.com/users/${
                 this.state.userId
             }/debts/${debtee}`,
             {
