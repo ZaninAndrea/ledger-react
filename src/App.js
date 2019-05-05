@@ -10,6 +10,7 @@ import Fab from "@material-ui/core/Fab"
 import AddIcon from "@material-ui/icons/Add"
 import UserPage from "./UserPage"
 import HomePage from "./HomePage"
+import CircularProgress from "@material-ui/core/CircularProgress"
 
 export default class App extends React.Component {
     state = {
@@ -86,7 +87,13 @@ export default class App extends React.Component {
     }
 
     render() {
-        if (this.state.loadingUsers) return "loading"
+        if (this.state.loadingUsers)
+            return (
+                <div style={{ margin: "100px calc(50vw - 30px)" }}>
+                    <CircularProgress size="60px" />
+                </div>
+            )
+
         if (this.state.userId === null) {
             return (
                 <HomePage

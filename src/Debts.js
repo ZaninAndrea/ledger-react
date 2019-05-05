@@ -9,9 +9,19 @@ import Paper from "@material-ui/core/Paper"
 import red from "@material-ui/core/colors/red"
 import green from "@material-ui/core/colors/green"
 import DeleteIcon from "@material-ui/icons/Delete"
+import CircularProgress from "@material-ui/core/CircularProgress"
 
 export default ({ loading, data, cancelDebt }) => {
-    if (loading) return "loading debts"
+    if (loading)
+        return (
+            <div
+                style={{
+                    margin: "100px calc(50vw - 30px)",
+                }}
+            >
+                <CircularProgress size="60px" />
+            </div>
+        )
     else
         return (
             <Paper>
